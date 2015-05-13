@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+    <!-- responsibility chain for exception handle -->
+	<bean id="exceptionHandlerChain"
+		class="com.tuniu.common.exception.handler.ExceptionHandlerChain">
+		<property name="chain">
+			<list>
+				<bean id="logBackExceptionHandler"
+					class="com.tuniu.common.exception.handler.LogBackExceptionHandler">
+					<property name="level" value="3" />
+				</bean>
+				<bean id="mongoDBExceptionHandler"
+					class="com.tuniu.common.exception.handler.MongoDBExceptionHandler">
+					<property name="level" value="2" />
+				</bean>
+				<bean id="rtxExceptionHandler"
+					class="com.tuniu.common.exception.handler.RtxExceptionHandler">
+					<property name="level" value="1" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+    <!-- thread pool for asyn handle -->
+    <bean id="exceptionHandleExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="threadNamePrefix" value="exceptionHandleExecutor" />
+		<property name="corePoolSize" value="20" />
+		<property name="maxPoolSize" value="20" />
+		<property name="queueCapacity" value="100000" />
+	</bean>
+	<!-- exception manager -->
+	<bean id="exceptionManager" class="com.tuniu.common.exception.api.ExceptionManager">
+		<property name="systemCode" value="CFM" />
+		<property name="systemName" value="New Confirmation" />
+		<property name="ehc" ref="exceptionHandlerChain" />
+		<property name="exceptionHandleExecutor" ref="exceptionHandleExecutor"/>
+	</bean>
+    <!-- aop config -->
+	<aop:config>
+		<aop:pointcut id="unifiedException"
+			expression="execution(* com.tuniu.mauritius..*Controller.*(..)) or execution(* com.tuniu.mauritius..*Delegate.*(..))" />
+		<aop:advisor advice-ref="unifiedExceptionThrowsAdvice"
+			pointcut-ref="unifiedException" />
+	</aop:config>
+	<!-- throw advice -->
+	<bean id="unifiedExceptionThrowsAdvice"
+		class="com.tuniu.common.exception.aop.UnifiedExceptionThrowsAdvice">
+		<property name="exceptionManager" ref="exceptionManager" />
+	</bean>
+	
+</beans>
