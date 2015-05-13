@@ -1,5 +1,6 @@
 # exception
-unified exception framework
+unified exception framework（统一的异常框架）
+
 各个业务系统的异常处理会存在一些问题：
 1.异常定义不统一（几乎每个系统都定义了自己的业务异常类）；
 2.异常处理混乱（有时候流程卡住，有时忽略了异常）;
