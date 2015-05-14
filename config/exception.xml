@@ -18,10 +18,12 @@
 				<bean id="mongoDBExceptionHandler"
 					class="com.tuniu.common.exception.handler.MongoDBExceptionHandler">
 					<property name="level" value="2" />
+					<property name="asynFlag" value="true" /property>
 				</bean>
 				<bean id="rtxExceptionHandler"
 					class="com.tuniu.common.exception.handler.RtxExceptionHandler">
 					<property name="level" value="1" />
+					<property name="asynFlag" value="true" /property>
 				</bean>
 			</list>
 		</property>
@@ -36,15 +38,15 @@
 	</bean>
 	<!-- exception manager -->
 	<bean id="exceptionManager" class="com.tuniu.common.exception.api.ExceptionManager">
-		<property name="systemCode" value="CFM" />
-		<property name="systemName" value="New Confirmation" />
+		<property name="systemCode" value="AKO" />
+		<property name="systemName" value="Manual confirmation" />
 		<property name="ehc" ref="exceptionHandlerChain" />
 		<property name="exceptionHandleExecutor" ref="exceptionHandleExecutor"/>
 	</bean>
     <!-- aop config -->
 	<aop:config>
 		<aop:pointcut id="unifiedException"
-			expression="execution(* com.tuniu.mauritius..*Controller.*(..)) or execution(* com.tuniu.mauritius..*Delegate.*(..))" />
+			expression="execution(* com.tuniu.mauritius.ako..*Controller.*(..))" />
 		<aop:advisor advice-ref="unifiedExceptionThrowsAdvice"
 			pointcut-ref="unifiedException" />
 	</aop:config>
