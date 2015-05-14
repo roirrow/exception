@@ -105,7 +105,9 @@ CREATE TABLE `notify_users_config` (
     `del_flag` int(4) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记 0：未删除有效  1：已删除',
     PRIMARY KEY (`id`)
 )  ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
 e.g:
+
 INSERT INTO `notify_users_config` (`id`,`user_type`,`address`,`del_flag`) VALUES (1,1,'?',0);
 
 mongodb-contexnt.xml 记录异常日志到mongodb的配置:
