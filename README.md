@@ -18,7 +18,9 @@ exception.xml 异常处理的主要配置：
 					<property name="level" value="2" />
 					<property name="asynFlag" value="true" /property>
 				</bean>
-				<!--如果配置了rtx通知异常处理，则需要配置common-utils.xml，负责不需要-->
+				<!--如果配置了rtx通知异常处理，则需要配置common-utils.xml，否则不需要-->
+				<!--common-utils.jar是公司内部的jar包，主要是一些通知组件，没有开源-->
+				<!--建议大家可以直接去掉这个配置，以及pom里对这个jar的依赖-->
 				<bean id="rtxExceptionHandler"
 					class="com.tuniu.common.exception.handler.RtxExceptionHandler">
 					<property name="level" value="1" />
@@ -29,7 +31,7 @@ exception.xml 异常处理的主要配置：
 	</bean>
 	
     <!-- thread pool for asyn handle -->
-    <!--如果异常处理resolver没有异步处理(asynFlag=true的)的话，不需要配置exceptionHandleExecutor-->
+    <!--如果异常处理resolver没有设置异步处理(asynFlag=true的)的话，不需要配置exceptionHandleExecutor-->
     
     <bean id="exceptionHandleExecutor"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
@@ -61,7 +63,7 @@ exception.xml 异常处理的主要配置：
 		<property name="exceptionManager" ref="exceptionManager" />
 	</bean>
 
-common-utils.xml 通知组件配置,通知人的获取逻辑是从数据库获取，缓存在memcache里：
+common-utils.xml 通知组件配置,通知人的获取逻辑是从数据库获取，缓存在memcache里,如果大家用不到的话，可以直接忽略：
 
 	<bean id="defaultTranscoderTool" class="net.spy.memcached.transcoders.SerializingTranscoder"></bean>
 	
@@ -109,6 +111,7 @@ CREATE TABLE `notify_users_config` (
 e.g:
 
 INSERT INTO `notify_users_config` (`id`,`user_type`,`address`,`del_flag`) VALUES (1,1,'?',0);
+
 
 mongodb-contexnt.xml 记录异常日志到mongodb的配置:
 
