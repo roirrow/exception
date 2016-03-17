@@ -1,13 +1,12 @@
-package com.tuniu.common.exception.handler;
+package com.roirrow.common.exception.handler;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import com.roirrow.common.exception.UnifiedException;
+import com.roirrow.common.exception.handler.repository.ExceptionHandlerRepository;
+import com.roirrow.common.exception.vo.GlobalInfo;
 
 import javax.annotation.Resource;
-
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.common.exception.handler.repository.ExceptionHandlerRepository;
-import com.tuniu.common.exception.vo.GlobalInfo;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 /**
  * 
  * <Description>mongo db异常处理器<br> 
@@ -18,7 +17,7 @@ import com.tuniu.common.exception.vo.GlobalInfo;
  * @CreateDate 2015年4月13日 <br>
  */
 public class MongoDBExceptionHandler extends AbsExceptionHandler{
-    //支持的异常等级 @see com.tuniu.common.exception.constant.ExceptionLevel
+    //支持的异常等级 @see ExceptionLevel
     private int level = 2;
     
     @Resource
@@ -39,8 +38,8 @@ public class MongoDBExceptionHandler extends AbsExceptionHandler{
         PrintWriter printWriter = new PrintWriter(stringWriter);
         ue.printStackTrace(printWriter);
         String exception = ue.getMessage() + stringWriter.toString();
-        ExceptionHandlerRepository.ExceptionRecord er = new ExceptionHandlerRepository.ExceptionRecord(gi.getSystemCode(), gi.getSystemName(), ue
-                .getLevel().getDescription(), ue.getDescription(), ue.getErrorCode(), exception);
+        ExceptionHandlerRepository.ExceptionRecord er = new ExceptionHandlerRepository.ExceptionRecord(gi.getSystemCode(), ue
+                .getLevel().getDescription(), ue.getErrorMessage(), ue.getErrorCode(), exception);
         exceptionHandlerRepository.save(er);
     }
 

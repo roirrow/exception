@@ -1,11 +1,11 @@
-package com.tuniu.common.exception.resolver;
+package com.roirrow.common.exception.resolver;
 
 import java.util.HashMap;
 import java.util.Map;
 /**
  * 
- * <Description>公用返回值<br> 
- *  
+ * <Description>公用返回值,可以设置为自己公司的统一返回值<br>
+ *  @see com.roirrow.common.exception.resolver.ResponseVo
  * @author wanglei<br>
  * @version 1.0<br>
  * @taskId <br>

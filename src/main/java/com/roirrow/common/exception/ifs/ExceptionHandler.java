@@ -1,8 +1,8 @@
-package com.tuniu.common.exception.ifs;
+package com.roirrow.common.exception.ifs;
 
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.common.exception.handler.ExceptionHandlerChain;
-import com.tuniu.common.exception.vo.GlobalInfo;
+import com.roirrow.common.exception.UnifiedException;
+import com.roirrow.common.exception.handler.ExceptionHandlerChain;
+import com.roirrow.common.exception.vo.GlobalInfo;
 
 /**
  * 

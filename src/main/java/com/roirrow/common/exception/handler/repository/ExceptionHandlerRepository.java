@@ -1,7 +1,8 @@
-package com.tuniu.common.exception.handler.repository;
-import javax.persistence.Id;
+package com.roirrow.common.exception.handler.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import javax.persistence.Id;
 /**
  * 
  * <Description>mongo repository<br> 
@@ -34,13 +35,12 @@ public interface ExceptionHandlerRepository extends MongoRepository<ExceptionHan
         /**
          * 构造器
          * @param systemCode
-         * @param systemName
          * @param level
          * @param description
          * @param errorCode
          * @param exception
          */
-        public ExceptionRecord(String systemCode, String systemName, String level, String description, String errorCode,String exception) {
+        public ExceptionRecord(String systemCode, String level, String description, String errorCode,String exception) {
             super();
             this.systemCode = systemCode;
             this.systemName = systemName;

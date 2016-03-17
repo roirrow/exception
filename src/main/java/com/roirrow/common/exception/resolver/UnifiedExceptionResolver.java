@@ -1,20 +1,19 @@
-package com.tuniu.common.exception.resolver;
+package com.roirrow.common.exception.resolver;
 
+import com.roirrow.common.exception.UnifiedException;
+import org.apache.commons.codec.binary.Base64;
+import org.json.JSONObject;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.operation.platform.tsg.base.core.utils.JsonUtil;
 
 /**
  * 
@@ -36,10 +35,10 @@ public class UnifiedExceptionResolver extends SimpleMappingExceptionResolver {
         if (ex instanceof UnifiedException) {
             unifiedException = (UnifiedException) ex;
             responseVo.setErrorCode(Integer.parseInt(unifiedException.getErrorCode()));
-            responseVo.setMsg(unifiedException.getDescription());
+            responseVo.setMsg(unifiedException.getErrorMessage());
         } else {
             responseVo.setErrorCode(500);
-            responseVo.setMsg("unknow exception!");
+            responseVo.setMsg("Not an UnifiedException");
         }
         write(response, responseVo);
         return null;
@@ -62,7 +61,7 @@ public class UnifiedExceptionResolver extends SimpleMappingExceptionResolver {
             map.put("msg", result.getMsg());
             map.put("errorCode", result.getErrorCode());
 
-            String resStr = Base64.encodeBase64String(JsonUtil.toString(map).getBytes("utf-8"));         
+            String resStr = Base64.encodeBase64String(JSONObject.valueToString(map).getBytes("utf-8"));
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Content-Type","application/json;charset=UTF-8");
             response.setHeader("Access-Control-Allow-Methods", "*");

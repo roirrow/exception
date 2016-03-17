@@ -1,10 +1,13 @@
-package com.tuniu.common.exception.handler;
+package com.roirrow.common.exception.handler;
 
+import com.roirrow.common.exception.UnifiedException;
+import com.roirrow.common.exception.constant.ExceptionLevel;
+import com.roirrow.common.exception.vo.GlobalInfo;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.common.exception.vo.GlobalInfo;
+import java.util.Map;
 
 /**
  * <Description>打印logback日志文件<br>
@@ -18,7 +21,9 @@ public class LogBackExceptionHandler extends AbsExceptionHandler {
     // logger
     private Logger LOG = LoggerFactory.getLogger(LogBackExceptionHandler.class);
     
-    //支持的异常等级 @see com.tuniu.common.exception.constant.ExceptionLevel
+    /**支持的异常等级
+    @see ExceptionLevel
+    **/
     private int level = 3;
     
     @Override
@@ -28,9 +33,11 @@ public class LogBackExceptionHandler extends AbsExceptionHandler {
 
     @Override
     protected void doHandle(UnifiedException ue, GlobalInfo gi) {
+        Map<String,Object> context = ue.getContext();
+        String errorContext = null == context ? "" : JSONObject.valueToString(context);
         LOG.error(
-                "系统code:" + gi.getSystemCode() + " 系统名称:" + gi.getSystemName() + " 业务模块:" + ue.getBusinessModule() + " 发生异常,异常描述:"
-                        + ue.getDescription(), ue);
+                "system:" + gi.getSystemCode() + " module" + ue.getBusinessModule() + " error:"
+                        + ue.getErrorMessage() + " context:" + errorContext, ue);
     }
 
     /** 

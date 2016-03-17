@@ -1,4 +1,4 @@
-package com.tuniu.common.exception.constant;
+package com.roirrow.common.exception.constant;
 
 /**
  * <Description>异常等级 1： 严重 2：一般 3: 非重要异常 值越大表示级别越低,默认是非重要异常<br>

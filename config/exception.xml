@@ -8,20 +8,20 @@
            http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
     <!-- responsibility chain for exception handle -->
 	<bean id="exceptionHandlerChain"
-		class="com.tuniu.common.exception.handler.ExceptionHandlerChain">
+		class="com.roirrow.common.exception.handler.ExceptionHandlerChain">
 		<property name="chain">
 			<list>
 				<bean id="logBackExceptionHandler"
-					class="com.tuniu.common.exception.handler.LogBackExceptionHandler">
+					class="com.roirrow.common.exception.handler.LogBackExceptionHandler">
 					<property name="level" value="3" />
 				</bean>
 				<bean id="mongoDBExceptionHandler"
-					class="com.tuniu.common.exception.handler.MongoDBExceptionHandler">
+					class="com.roirrow.common.exception.handler.MongoDBExceptionHandler">
 					<property name="level" value="2" />
 					<property name="asynFlag" value="true" /property>
 				</bean>
 				<bean id="rtxExceptionHandler"
-					class="com.tuniu.common.exception.handler.RtxExceptionHandler">
+					class="com.roirrow.common.exception.handler.RtxExceptionHandler">
 					<property name="level" value="1" />
 					<property name="asynFlag" value="true" /property>
 				</bean>
@@ -37,7 +37,7 @@
 		<property name="queueCapacity" value="100000" />
 	</bean>
 	<!-- exception manager -->
-	<bean id="exceptionManager" class="com.tuniu.common.exception.api.ExceptionManager">
+	<bean id="exceptionManager" class="com.roirrow.common.exception.api.ExceptionManager">
 		<property name="systemCode" value="AKO" />
 		<property name="systemName" value="Manual confirmation" />
 		<property name="ehc" ref="exceptionHandlerChain" />
@@ -52,7 +52,7 @@
 	</aop:config>
 	<!-- throw advice -->
 	<bean id="unifiedExceptionThrowsAdvice"
-		class="com.tuniu.common.exception.aop.UnifiedExceptionThrowsAdvice">
+		class="com.roirrow.common.exception.aop.UnifiedExceptionThrowsAdvice">
 		<property name="exceptionManager" ref="exceptionManager" />
 	</bean>
 	

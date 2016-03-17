@@ -1,4 +1,4 @@
-package com.tuniu.common.exception.vo;
+package com.roirrow.common.exception.vo;
 
 import org.springframework.core.task.TaskExecutor;
 
@@ -17,11 +17,6 @@ public class GlobalInfo {
     private String systemCode;
 
     /**
-     * 系统中文名
-     */
-    private String systemName;
-
-    /**
      * 是否最后一个异常处理器
      */
     private boolean isLast;
@@ -34,13 +29,11 @@ public class GlobalInfo {
     /**
      * 构造器
      * @param systemCode code of the current system
-     * @param systemName name of the current system
-     * @param isLast identifying if this exception handler is the last handler 
+     * @param isLast identifying if this exception handler is the last handler
      * @param exceptionHandleExecutor asyn thread pool
      */
-    public GlobalInfo(String systemCode, String systemName, boolean isLast,TaskExecutor exceptionHandleExecutor) {
+    public GlobalInfo(String systemCode, boolean isLast,TaskExecutor exceptionHandleExecutor) {
         this.systemCode = systemCode;
-        this.systemName = systemName;
         this.isLast = isLast;
         this.exceptionHandleExecutor = exceptionHandleExecutor;
     }
@@ -48,22 +41,18 @@ public class GlobalInfo {
     /**
      * 构造器
      * @param systemCode
-     * @param systemName
      */
     public GlobalInfo(String systemCode, String systemName) {
         this.systemCode = systemCode;
-        this.systemName = systemName;
     }
     
     /**
      * 构造器
      * @param systemCode
-     * @param systemName
      * @param exceptionHandleExecutor
      */
-    public GlobalInfo(String systemCode, String systemName,TaskExecutor exceptionHandleExecutor) {
+    public GlobalInfo(String systemCode,TaskExecutor exceptionHandleExecutor) {
         this.systemCode = systemCode;
-        this.systemName = systemName;
         this.exceptionHandleExecutor = exceptionHandleExecutor;
     }
     
@@ -83,24 +72,6 @@ public class GlobalInfo {
      */
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode;
-    }
-
-    /**
-     * get systemName
-     * 
-     * @return Returns the systemName.<br>
-     */
-    public String getSystemName() {
-        return systemName;
-    }
-
-    /**
-     * set systemName
-     * 
-     * @param systemName The systemName to set. <br>
-     */
-    public void setSystemName(String systemName) {
-        this.systemName = systemName;
     }
 
     /**

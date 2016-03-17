@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.tuniu.common</groupId>
+	<groupId>com.roirrow.common</groupId>
 	<artifactId>exception</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>exception</name>
 	<properties>
@@ -36,19 +36,29 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>3.2.16.RELEASE</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.4.2.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>com.tuniu.common</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>0.0.7</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -104,16 +114,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>dev</id>
-			<name>Internal Releases</name>
-			<url>http://10.10.30.62:8080/artifactory/tuniu-release-local</url>
-		</repository>
-		<snapshotRepository>
-			<id>dev</id>
-			<name>Internal Snapshots</name>
-			<url>http://10.10.30.62:8080/artifactory/tuniu-release-local</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>

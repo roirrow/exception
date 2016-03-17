@@ -1,8 +1,8 @@
-package com.tuniu.common.exception.handler;
+package com.roirrow.common.exception.handler;
 
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.common.exception.ifs.ExceptionHandler;
-import com.tuniu.common.exception.vo.GlobalInfo;
+import com.roirrow.common.exception.UnifiedException;
+import com.roirrow.common.exception.ifs.ExceptionHandler;
+import com.roirrow.common.exception.vo.GlobalInfo;
 
 /**
  * <Description>异常处理抽象类<br>
@@ -54,15 +54,16 @@ public abstract class AbsExceptionHandler implements ExceptionHandler {
      * @CreateDate 2015年4月27日 <br>
      */
     private class ExceptionHandlerRunnable implements Runnable{
+
         /**
-         * @see com.tuniu.common.exception.UnifiedException
+         * @see UnifiedException
          */
         private UnifiedException ue;
         /**
-         * @see com.tuniu.common.exception.vo.GlobalInfo
+         * @see GlobalInfo
          */
-        private GlobalInfo gi;
-        
+        private GlobalInfo       gi;
+
         /**
          * constructor
          * @param ue
@@ -72,15 +73,14 @@ public abstract class AbsExceptionHandler implements ExceptionHandler {
             this.ue = ue;
             this.gi = gi;
         }
-        
-        @Override
-        public void run() {
-            doHandle(ue,gi);
+
+        @Override public void run() {
+            doHandle(ue, gi);
         }
-        
+
     }
 
-    /** 
+    /**
      * get asynFlag
      * @return Returns the asynFlag.<br> 
      */
@@ -88,12 +88,12 @@ public abstract class AbsExceptionHandler implements ExceptionHandler {
         return asynFlag;
     }
 
-    /** 
+    /**
      * set asynFlag
      * @param asynFlag The asynFlag to set. <br>
      */
     public void setAsynFlag(boolean asynFlag) {
         this.asynFlag = asynFlag;
     }
-    
+
 }

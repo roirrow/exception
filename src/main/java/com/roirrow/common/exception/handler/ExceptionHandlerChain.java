@@ -1,15 +1,15 @@
-package com.tuniu.common.exception.handler;
+package com.roirrow.common.exception.handler;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.tuniu.common.exception.UnifiedException;
-import com.tuniu.common.exception.vo.GlobalInfo;
+import com.roirrow.common.exception.UnifiedException;
+import com.roirrow.common.exception.vo.GlobalInfo;
 
 /**
  * 
  * <Description>异常处理责任链<br> 
- * @see @see com.tuniu.common.exception.handler.AbsExceptionHandler
+ * @see AbsExceptionHandler
  * @author wanglei<br>
  * @version 1.0<br>
  * @taskId <br>
