@@ -12,10 +12,6 @@
         http://www.springframework.org/schema/data/mongo
         http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-	<bean id="appProperties" class="com.tuniu.mauritius.confirmation.AppProperties">
-		<property name="currentProfile" value="${env.name}"></property>
-	</bean>
-
     <!-- Connection to MongoDB server -->
     <mongo:db-factory host="${mongo.host}" port="${mongo.port}" dbname="${mongo.dbname}" username="${mongo.user}" password="${mongo.password}" />
     <!-- MongoDB Template -->
@@ -23,7 +19,7 @@
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
     </bean>
 
-    <!-- Package w/ automagic repositories -->
-    <mongo:repositories base-package="com.tuniu.mauritius.confirmation,com.tuniu.common.exception.handler" />
+    <!-- mongo repositories -->
+    <mongo:repositories base-package="com.roirrow.common.exception.handler.repository" />
 
 </beans>
